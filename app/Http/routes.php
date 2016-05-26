@@ -19,4 +19,9 @@ Route::get('/', function () {
 
 
 
-Route::group(['prefix' => 'api/'], function(){ Route::resource('category', 'CategoryController'); });
+Route::group(['prefix' => 'api/'], 
+ function(){ Route::resource('category', 'CategoryController'); 
+            Route::resource('location', 'LocationController');
+            Route::resource('specificorder', 'SpecificOrderController');
+ }
+ );       
