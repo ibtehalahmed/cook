@@ -23,5 +23,7 @@ Route::group(['prefix' => 'api/'], function(){
     Route::resource('category', 'CategoryController');
     Route::resource('user', 'Usercontroller'); 
     Route::post('auth','Usercontroller@checkAuth');
+    Route::post('register','Usercontroller@store');
+
 
 });
