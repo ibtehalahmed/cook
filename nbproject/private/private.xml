@@ -2,6 +2,18 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/var/www/html/laavel/database/seeds/DatabaseSeeder.php</file>
+            <file>file:/var/www/html/laavel/database/migrations/2016_05_24_130111_create_meals_table.php</file>
+            <file>file:/var/www/html/laavel/app/Console/Commands/Inspire.php</file>
+            <file>file:/var/www/html/laavel/app/Http/routes.php</file>
+            <file>file:/var/www/html/laavel/app/User.php</file>
+            <file>file:/var/www/html/laavel/database/migrations/2016_05_23_161002_create_categories_table.php</file>
+            <file>file:/var/www/html/laavel/app/Console/Kernel.php</file>
+            <file>file:/var/www/html/laavel/database/migrations/2016_05_23_155733_create_location_table.php</file>
+            <file>file:/var/www/html/laavel/app/Http/Middleware/VerifyCsrfToken.php</file>
+            <file>file:/var/www/html/laavel/app/Http/Kernel.php</file>
+            <file>file:/var/www/html/laavel/database/migrations/2016_05_23_161600_create_specific_orders_table.php</file>
+        </group>
     </open-files>
 </project-private>

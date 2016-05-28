@@ -39,13 +39,6 @@
         <div class="container">
             <div class="content">
                 <div class="title">Laravel 5</div>
-<<<<<<< HEAD
-
-<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
-
-
-=======
->>>>>>> 3e34b8efd3ad84d30abc4961265ac45e1d53d191
             </div>
         </div>
     </body>
