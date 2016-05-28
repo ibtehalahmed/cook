@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Validator;
 use App\Http\Requests;
 use Response;
 class SpecificOrderController extends Controller
@@ -48,19 +48,44 @@ class SpecificOrderController extends Controller
     public function store(Request $request)
     {
         //
-         if(! $request->name or ! $request->id){
+          $validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'quantity' => 'required|max:255',
+            'description' => 'required',
+            
+        ]);
+        
+        if ($validator->fails()){
+               // var_dump($validator->$errors()->all());
+             //return response('make sure that your data is correct',403);  
+             return response($validator->errors()->all(),403);
+
+            }
+        $order = \App\SpecificOrder::create($request->all());
+        return Response::json
+        ([
+           'message' => 'Order Created Succesfully'
+                
+        ]);
+
+        
+        
+        
+        /////////////////////////////////////////////////
+        /*
+         if(! $request->name or ! $request->quantity){
             return Response::json([
                 'error' => [
-                    'message' => 'Please Provide Both name and id'
+                    'message' => 'Please Provide Both name and quantity'
                 ]
             ], 422);
         }
         $order = \App\SpecificOrder::create($request->all());
  
         return Response::json([
-                'message' => 'Order Created Succesfully',
-                'data' => $this->transform($order)
-        ]);
+                'message' => 'Order Created Succesfully'
+                
+        ]);*/
     }
 
     /**
