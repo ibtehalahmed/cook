@@ -32,13 +32,14 @@ class User extends Authenticatable
 
 
       public function location(){
-        return $this->hasMany('App/location');
+        return $this->belongsTo('App/location');
       }
 
        public function specificOrder(){
         return $this->hasMany('App/SpecificOrder');
       }
-      public function meal(){
-        return $this->hasMany('App/Meal','id')
-      }
+      public function meals(){
+        return $this->hasMany('App/Meal');
+      
+}
 }

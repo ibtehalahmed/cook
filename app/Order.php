@@ -12,6 +12,6 @@ class Order extends Model
     }
      public function meal()
     {
-        return $this->belongsTo('App\Meal');
+       return $this->hasMany('App\Meal', 'meal_id');
     }
       }

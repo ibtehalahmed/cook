@@ -61,7 +61,7 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-<<<<<<< HEAD
+
     protected function create(array $data)
     {
         return User::create([
@@ -70,6 +70,5 @@ class AuthController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
-=======
->>>>>>> 3e34b8efd3ad84d30abc4961265ac45e1d53d191
+
 }
