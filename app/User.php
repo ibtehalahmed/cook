@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 class User extends Authenticatable
 {
     protected $table='users';
@@ -14,6 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+
         'name', 'email', 'password','phone','address','usertype'
 
     ];
@@ -28,11 +30,15 @@ class User extends Authenticatable
     ];
 
 
+
       public function location(){
-        return $this->hasMany('App/location');
+        return $this->belongsTo('App/Location');
       }
 
        public function specificOrder(){
         return $this->hasMany('App/SpecificOrder');
+      }
+      public function meal(){
+        return $this->hasMany('App/Meal','id');
       }
 }

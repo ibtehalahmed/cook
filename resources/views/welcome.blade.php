@@ -39,6 +39,9 @@
         <div class="container">
             <div class="content">
                 <div class="title">Laravel 5</div>
+
+<input type="hidden" name="_token" value="<?php echo csrf_token() ?>">
+
             </div>
         </div>
     </body>

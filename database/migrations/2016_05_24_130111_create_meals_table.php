@@ -21,9 +21,6 @@ class CreateMealsTable extends Migration
             $table->string('description');
             $table->timestamps();
 
-
-
-
         }); 
     }
 

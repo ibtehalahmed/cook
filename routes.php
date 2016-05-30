@@ -10,16 +10,14 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-//TgHW9D3!h
-//cookteam
+
 use Illuminate\Database\Eloquent\Model\Category;
 
-
 Route::get('/', function () {
-    return view('welcome');
+  return "hello";
 });
-//Route::controller('/orders','OrderController@index') ;
-//Route::get('/orders', ['uses' => 'OrderController@index']);
+
+
 
 
 Route::group(['prefix' => 'api/'], function(){ 
@@ -29,10 +27,8 @@ Route::group(['prefix' => 'api/'], function(){
     Route::post('register','Usercontroller@store');
     Route::resource('location', 'LocationController');
     Route::resource('specificorder', 'SpecificOrderController');
-    Route::resource('orders', 'OrderController');
-    Route::get('orders/calculate/{id}', 'OrderController@calculate');
-     Route::get('meals/{c_id}', 'MealController@showMealByCategory');
-      Route::resource('meal', 'MealController');
-   });
+
+
+});
 
 
