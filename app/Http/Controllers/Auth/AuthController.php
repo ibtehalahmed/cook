@@ -61,6 +61,10 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
+<<<<<<< HEAD
+=======
+
+>>>>>>> 19bfd441e8fc1c948eac2dbb4e142b8ef5462a90
     protected function create(array $data)
     {
         return User::create([

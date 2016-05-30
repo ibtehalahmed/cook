@@ -96,7 +96,12 @@ class MealController extends Controller
 
      public function showMealByCategory($id)
     {
-        $meals = DB::table('meals')->where('category_id','=',$id)->get();
+        
+         $meals = DB::table('meals')->where('category_id','=',$id)->get();
+         //foreach ( $meals as $meal=>$m_value){
+           //$meals = DB::table('meals')->where('id','=',$id)->get();  
+         //}
+         
         return $meals;
         
     }
