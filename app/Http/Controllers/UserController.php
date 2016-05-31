@@ -79,7 +79,6 @@ class UserController extends Controller
             'location' => 'required'
         ]);
 
-var_dump($request);
             if ($validator->fails()){
                 return response($validator->errors()->all(),403);
 
