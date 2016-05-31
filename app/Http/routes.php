@@ -20,11 +20,17 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => 'api/'], function(){ 
+       // Route::group(['middleware' => 'chef'], function(){
+    Route::post('auth','UserController@checkAuth');
+    Route::post('register','UserController@store');
+    //});
+    Route::post('search','UserController@search');
+
     Route::resource('category', 'CategoryController');
-    Route::resource('user', 'Usercontroller'); 
-    Route::post('auth','Usercontroller@checkAuth');
-    Route::post('register','Usercontroller@store');
-
-
+    Route::resource('user', 'UserController'); 
+    Route::post('auth','UserController@checkAuth');
+    Route::resource('location','LocationController');
+    Route::post('register','UserController@store');
+    Route::get('logout','UserController@logout');
 });
 

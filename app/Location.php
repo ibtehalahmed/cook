@@ -7,10 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Location extends Model
 {
     //
-    protected $table = 'locations';
-      protected $fillable = [];
+      protected $table = 'locations';
+      protected $fillable = ['name'];
       protected $hidden = [];
-      public function user(){
-      	return $this->belongsTo('App/user');
+      
+      public function users(){
+      	return $this->hasMany('App/User');
       }
 }

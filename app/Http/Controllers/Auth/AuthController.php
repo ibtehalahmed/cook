@@ -28,7 +28,7 @@ class AuthController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = 'task';
 
     /**
      * Create a new authentication controller instance.
@@ -52,6 +52,10 @@ class AuthController extends Controller
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
+            'phone' => 'required|min:7|max:11|unique:users',
+            'address'=>'required|max:255',   
+            'usertype' => 'required',
+            'location' => 'required'
         ]);
     }
 
@@ -60,5 +64,37 @@ class AuthController extends Controller
      *
      * @param  array  $data
      * @return User
+     * 
      */
+     public function create(array $data){
+        $location_term = $data['location'];
+        $location = DB::table('locations')->where('name', '=', $location_term)->first();
+        $location_id = $location->id;
+         return  User::create(array(
+        'name' => $data['name'],
+        'email'    => $data['password'],
+        'password' => bcrypt($data['password']),
+        'phone'    => $data['phone'],
+        'address'  => $data['address'],
+        'usertype' => $data['usertype'],
+        'location_id'=>$location_id,     
+        
+
+    ));
+     }
+    public function postRegister(Request $request)
+    {
+        $validator = $this->validator($request->all());
+
+        if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+
+        Auth::Attempt($this->create($request->all()));
+
+        return response()->json([ 'message' => 'Registered Complete!' ], 200);
+    }
+    
 }
