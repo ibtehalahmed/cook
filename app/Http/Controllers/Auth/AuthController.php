@@ -97,4 +97,6 @@ class AuthController extends Controller
         return response()->json([ 'message' => 'Registered Complete!' ], 200);
     }
     
+
+
 }
