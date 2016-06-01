@@ -83,21 +83,23 @@ class UserController extends Controller
                 return response($validator->errors()->all(),403);
 
             }
+
         $location_term = $request->input('location');
-        $location = DB::table('locations')->where('name', '=', $location_term)->first();
-        $location_id = $location->id;
-        //dd($location_id);
-         User::create(array(
+        $location = DB::table('locations')
+                                          ->where('name', '=', $location_term)
+                                          ->first();
+      //  $location_id =intval($location->id);
+        //$location_id =2;
+        $array= User::create(array(
         'name' => $request->input('name'),
         'email'    => $request->input('email'),
         'password' => Hash::make($request->input(('password'))),
         'phone'    => $request->input('phone'),
         'address'  => $request->input('address'),
         'usertype' => $request->input('usertype'),
-        'location_id' => $location_id,     
+        'location_id' => $location->id,     
     ));
-         
-            $credentials = [
+        $credentials = [
                   'email' => $request->input('email'),
                   'password' => $request ->input('password')
               ];
