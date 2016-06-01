@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use DB;
+use Response;
 class MealController extends Controller
 {
     /**
@@ -44,7 +45,7 @@ class MealController extends Controller
         //$joke->save();
       
  
-       return $order;
+       return $meal;
        // var_dump($order);
     }
 
@@ -96,15 +97,32 @@ class MealController extends Controller
 
      public function showMealByCategory($id)
     {
-        
-         $meals = DB::table('meals')->where('category_id','=',$id)->get();
-         //foreach ( $meals as $meal=>$m_value){
-           //$meals = DB::table('meals')->where('id','=',$id)->get();  
-         //}
          
-        return $meals;
-        
+     $chefs=[];$i=0;
+        //all objects of meals
+         $meals = DB::table('meals')->where('category_id','=',$id)->get();
+         foreach ( $meals as $meal){
+                   
+                    $chef = DB::table('users')->where('id','=',$meal->user_id)->get();
+                    $chefs[$i]=$chef;    
+                    $i++;
     }
+  $array = array_merge( $meals , $chefs);
+return Response::json($array);
+   // return  Response::json(array('meals'=> $meals,'chef'=> $chefs ));
+                 }
+                 
+                     
+       public function showMealOfUser($id)
+    {
+
+         $meals = DB::table('meals')->where('user_id','=',$id)->get();
+        
+return Response::json($meals);
+   // return  Response::json(array('meals'=> $meals,'chef'=> $chefs ));
+                 }
+                 
+                    
 
     
     }

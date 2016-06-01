@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Meal extends Model
 {
     
-     protected $fillable=['id','name','price' ];
+     protected $fillable=['id','name','price' , 'quantity' , 'description','category_id', 'time','user_id'];
    
    // public function orders()
     //{

@@ -29,8 +29,10 @@ Route::group(['prefix' => 'api/'], function(){
     Route::resource('specificorder', 'SpecificOrderController');
     Route::resource('orders', 'OrderController');
     Route::get('orders/calculate/{id}', 'OrderController@calculate');
-     Route::get('meals/{c_id}', 'MealController@showMealByCategory');
-      Route::resource('meal', 'MealController');
+    Route::get('meals/{c_id}', 'MealController@showMealByCategory');
+    Route::get('meals/u/{c_id}', 'MealController@showMealOfUser');
+    Route::resource('meal', 'MealController');
+    Route::post('user/addmeal', 'Usercontroller@addNewMeal');
    });
 
 

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-
+use App\Meal;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -131,7 +131,28 @@ class Usercontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          if(!$request->id){
+            return Response::json([
+                'error' => [
+                    'message' => 'ليس مسموح لك تعديل البروفايل'
+                ]
+            ], 422);
+        }
+        if(User::find($id)){
+        $user = User::find($id);
+        //if(!$request->name){}
+        $user->name = $request->name;
+        $user->address = $request->address;
+        $user->password = $request->password;
+        $user->email = $request->email;
+        $user->save();
+ 
+        return Response::json([
+                'message' => 'تم تعديل'
+        ]);}
+        
+       
+        
     }
 
     /**
@@ -142,6 +163,24 @@ class Usercontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $meal = Meal::find($id);
+              $meal->delete();
+              return Response::json([
+                'message' => 'تم ازالة الوجبه'
+        ]);  
     }
-}
+
+    public function addNewMeal(Request $request){  
+         $meal = Meal::create($request->all());
+     //    $order = Order::find( $request->id);
+       // $order->quantity = $request->quantity;
+        //$joke->save();
+    return $meal;
+    }
+     
+    
+    }
+
+    
+    
+    
