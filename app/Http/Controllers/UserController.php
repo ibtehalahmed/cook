@@ -30,14 +30,14 @@ class UserController extends Controller
         
     }
       public function checkAuth(Request $request){
-            $val=$this->validate($request, [
-            'name' => 'required', 'password' => 'required',
-                 ]);
+
               $credentials = [
                   'email' => $request->input('email'),
                   'password' => $request ->input('password')
               ];
-              if ((! Auth ::attempt($credentials))&&( !$val)){
+
+
+              if ((! Auth ::attempt($credentials))){
                 return response('make sure that the email and password match',403);  
               }
               return response(Auth::User(),201);

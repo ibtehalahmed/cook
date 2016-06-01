@@ -15,7 +15,18 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+     protected $scan = [
+  'App\Http\Controllers\UserController',
+  'App\Http\Controllers\CategoryController',
+  'App\Http\Controllers\MealController',
+  'App\Http\Controllers\LocationController',
+         
+       
 
+
+  'App\Http\Controllers\Auth\AuthController',
+  'App\Http\Controllers\Auth\PasswordController',
+ ];
     /**
      * Define your route model bindings, pattern filters, etc.
      *
