@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Category;
+
 use App\Http\Requests;
+use App\Location;
+
+use App\Category;
 
 class LocationController extends Controller
 {
@@ -15,6 +18,10 @@ class LocationController extends Controller
      */
     public function index()
     {
+
+        $locations = Location::all();
+        return $locations;
+
         //
     }
 
@@ -25,7 +32,7 @@ class LocationController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -47,7 +54,7 @@ class LocationController extends Controller
      */
     public function show($id)
     {
-        //
+       
         $location=  \App\Location::find($id);
         if(!$location){
             return Response::json([
@@ -57,10 +64,7 @@ class LocationController extends Controller
                 ],404);
         }
         return Response::json($location);
-        
-        
-        
-        
+
     }
 
     /**

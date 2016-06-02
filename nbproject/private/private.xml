@@ -11,10 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/var/www/html/laavel/database/migrations/2016_05_24_130111_create_meals_table.php</file>
-            <file>file:/var/www/html/laavel/app/Http/routes.php</file>
-            <file>file:/var/www/html/laavel/app/Http/Controllers/Usercontroller.php</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

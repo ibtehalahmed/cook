@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Meal;
 use App\Http\Requests;
 use DB;
 use Response;
@@ -107,19 +107,17 @@ class MealController extends Controller
                     $chefs[$i]=$chef;    
                     $i++;
     }
-  $array = array_merge( $meals , $chefs);
-return Response::json($array);
-   // return  Response::json(array('meals'=> $meals,'chef'=> $chefs ));
+         $array = array_merge( $meals , $chefs);
+         return Response::json($array);
                  }
                  
                      
        public function showMealOfUser($id)
     {
-
+//dd($id);
          $meals = DB::table('meals')->where('user_id','=',$id)->get();
         
-return Response::json($meals);
-   // return  Response::json(array('meals'=> $meals,'chef'=> $chefs ));
+         return Response::json($meals);
                  }
                  
                     
