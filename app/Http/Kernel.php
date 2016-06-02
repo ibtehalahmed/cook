@@ -47,12 +47,9 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
-        'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'customer' =>\App\Http\Middleware\customerMiddleware::class,
-        'chef' =>\App\Http\Middleware\chefMiddleware::class,
-        'admin' =>\App\Http\Middleware\adminMiddleware::class,
+       
 
 
         ];

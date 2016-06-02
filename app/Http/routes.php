@@ -17,31 +17,32 @@ use Illuminate\Database\Eloquent\Model\Category;
 Route::get('/', function () {
     return view('welcome');
 });
-//Route::controller('/orders','OrderController@index') ;
-//Route::get('/orders', ['uses' => 'OrderController@index']);
 
 
 Route::group(['prefix' => 'api/'], function(){ 
+
     Route::post('auth',"UserController@checkAuth");
+
     Route::post('register','UserController@store');
     Route::post('search','UserController@search');
     Route::resource('user', 'UserController'); 
+
     Route::get('logout','UserController@logout');
     
     Route::post('user/addmeal', 'UserController@addNewMeal');
 
     Route::resource('location','LocationController');
-
-    Route::resource('category', 'CategoryController');
-    
-    Route::resource('specificorder', 'SpecificOrderController');
-    
-    Route::resource('orders', 'OrderController');
+    Route::get('logout','UserController@logout');
+    Route::post('auth','UserController@checkAuth');
+    Route::resource('category', 'CategoryController');  
+    Route::resource('specificorder', 'SpecificOrderConroller');
+ Route::resource('orders', 'OrderController');
     Route::get('orders/calculate/{id}', 'OrderController@calculate');
-    
-    Route::get('meals/{c_id}', 'MealController@showMealByCategory');
+     Route::get('meals/{c_id}', 'MealController@showMealByCategory');
     Route::get('meals/u/{c_id}', 'MealController@showMealOfUser');
     Route::resource('meal', 'MealController');
+
    });
+
 
 

@@ -23,12 +23,7 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    /**
-     * Where to redirect users after login / registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = 'task';
+ protected $loginPath = '/api/auth';
 
     /**
      * Create a new authentication controller instance.
