@@ -22,12 +22,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(){
-       // $this->middleware('guest', ['except' => ['logout']]);
-        //$this->middleware('chef',['except',['checkAuth','register']]);
-     /*$this->middleware(['middleware' =>'chef'],['except',['checkAuth','register']]);
-        $this->middleware(['middleware' =>'admin'],['except',['checkAuth','register']]);
-*/
-        
+      
     }
       public function checkAuth(Request $request){
 
@@ -88,8 +83,7 @@ class UserController extends Controller
         $location = DB::table('locations')
                                           ->where('name', '=', $location_term)
                                           ->first();
-      //  $location_id =intval($location->id);
-        //$location_id =2;
+
         $array= User::create(array(
         'name' => $request->input('name'),
         'email'    => $request->input('email'),
@@ -164,6 +158,15 @@ class UserController extends Controller
       else{
       return response('you are signed out');
     }
+    }
+    public function find_chefs_by_location($location_id){
+  
+        $chefs = DB::table('users')->where('location_id', '=', $location_id)
+                                   ->where('usertype',1)
+                                   ->get();
+    
+        return $chefs;
+    }
     
       }
     
@@ -172,4 +175,4 @@ class UserController extends Controller
     
     
     
-}
+

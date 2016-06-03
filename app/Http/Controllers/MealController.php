@@ -39,13 +39,10 @@ class MealController extends Controller
     {
         
         $meal = Meal::create($request->all());
-     //    $order = Order::find( $request->id);
-       // $order->quantity = $request->quantity;
-        //$joke->save();
+   
       
  
        return $order;
-       // var_dump($order);
     }
 
     /**
@@ -98,9 +95,7 @@ class MealController extends Controller
     {
         
          $meals = DB::table('meals')->where('category_id','=',$id)->get();
-         //foreach ( $meals as $meal=>$m_value){
-           //$meals = DB::table('meals')->where('id','=',$id)->get();  
-         //}
+        
          
         return $meals;
         

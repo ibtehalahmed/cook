@@ -22,7 +22,8 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'api/'], function(){ 
     Route::post('register','UserController@store');
-    Route::post('search','UserController@search');
+    Route::get('chefs/{loc_id}','UserController@find_chefs_by_location');
+
 
     Route::resource('category', 'CategoryController');
     Route::resource('user', 'UserController'); 
