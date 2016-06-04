@@ -3,11 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
+use App\Meal;
 use App\Http\Requests;
 use DB;
-
-class MealController extends Controller {
-
+use Response;
+class MealController extends Controller
+{
     /**
      * Display a listing of the resource.
      *
@@ -37,9 +39,7 @@ class MealController extends Controller {
 
         $meal = Meal::create($request->all());
 
-
-
-        return $order;
+       return $meal;
     }
 
     /**
@@ -84,12 +84,32 @@ class MealController extends Controller {
         //
     }
 
-    public function showMealByCategory($id) {
 
-        $meals = DB::table('meals')->where('category_id', '=', $id)->get();
-
-
-        return $meals;
+     public function showMealByCategory($id)
+    {
+         
+     $chefs=[];$i=0;
+        //all objects of meals
+         $meals = DB::table('meals')->where('category_id','=',$id)->get();
+         foreach ( $meals as $meal){
+                   
+                    $chef = DB::table('users')->where('id','=',$meal->user_id)->get();
+                    $chefs[$i]=$chef;    
+                    $i++;
     }
+         $array = array_merge( $meals , $chefs);
+         return Response::json($array);
+                 }
+                 
+                     
+       public function showMealOfUser($id)
+    {
+
+         $meals = DB::table('meals')->where('user_id','=',$id)->get();
+        
+         return Response::json($meals);
+    }
+                 
+                    
 
 }

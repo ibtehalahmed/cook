@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Validator;
-use App\Role;
+use App\Meal;
 use App\User;
 use App\Http\Requests;
 use Illuminate\Support\Facades\Auth;
@@ -22,21 +22,20 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function __construct(){
-      
-    }
-      public function checkAuth(Request $request){
 
+    }
+    
+      public function checkAuth(Request $request){
               $credentials = [
                   'email' => $request->input('email'),
                   'password' => $request ->input('password')
               ];
-
-
               if ((! Auth ::attempt($credentials))){
                 return response('make sure that the email and password match',403);  
               }
               return response(Auth::User(),201);
-    }
+                            
+              }
 
     public function index()
     {
@@ -97,7 +96,6 @@ class UserController extends Controller
                   'email' => $request->input('email'),
                   'password' => $request ->input('password')
               ];
-            ///$user = DB::table('users')->where('email', '=', $email)->get();
 
             if (! Auth ::attempt($credentials)){
                 return response('cannot register',403);  
@@ -138,7 +136,28 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+          if(!$request->id){
+            return Response::json([
+                'error' => [
+                    'message' => 'ليس مسموح لك تعديل البروفايل'
+                ]
+            ], 422);
+        }
+        if(User::find($id)){
+        $user = User::find($id);
+        //if(!$request->name){}
+        $user->name = $request->name;
+        $user->address = $request->address;
+        $user->password = $request->password;
+        $user->email = $request->email;
+        $user->save();
+ 
+        return Response::json([
+                'message' => 'تم تعديل'
+        ]);}
+        
+       
+        
     }
 
     /**
@@ -149,8 +168,22 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $meal = Meal::find($id);
+              $meal->delete();
+              return Response::json([
+                'message' => 'تم ازالة الوجبه'
+        ]);  
     }
+
+    public function addNewMeal(Request $request){  
+         $meal = Meal::create($request->all());
+   
+         return $meal;
+    }
+     
+    
+    
+
     public function logout(){
       if (! Auth::User()){
        return response('you are not logged in');
@@ -176,4 +209,5 @@ class UserController extends Controller
     
     
     
+
 
