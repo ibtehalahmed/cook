@@ -3,20 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use DB;
-class MealController extends Controller
-{
+
+class MealController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-           $meals = DB::table('meals')->get();
-       return $meals;
+    public function index() {
+        $meals = DB::table('meals')->get();
+        return $meals;
     }
 
     /**
@@ -24,8 +23,7 @@ class MealController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -35,14 +33,13 @@ class MealController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        
+    public function store(Request $request) {
+
         $meal = Meal::create($request->all());
-   
-      
- 
-       return $order;
+
+
+
+        return $order;
     }
 
     /**
@@ -51,9 +48,8 @@ class MealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-       $meals = DB::table('meals')->where('id','=',$id)->get();
+    public function show($id) {
+        $meals = DB::table('meals')->where('id', '=', $id)->get();
         return $meals;
     }
 
@@ -63,8 +59,7 @@ class MealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -75,8 +70,7 @@ class MealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -86,20 +80,16 @@ class MealController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 
-     public function showMealByCategory($id)
-    {
-        
-         $meals = DB::table('meals')->where('category_id','=',$id)->get();
-        
-         
+    public function showMealByCategory($id) {
+
+        $meals = DB::table('meals')->where('category_id', '=', $id)->get();
+
+
         return $meals;
-        
     }
 
-    
-    }
+}

@@ -114,7 +114,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $profile = DB::table('users')->where('id', '=', $id)->get();
+        return $profile;
     }
 
     /**
