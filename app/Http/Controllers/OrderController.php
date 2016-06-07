@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\MealOrder;
 use App\Order;
+use App\User;
 use Response;
 use DB;
 
@@ -45,23 +46,36 @@ class OrderController extends Controller
     {   
         $id=$request->input('user_id');
         $user =User::find($id);
-         $type =$user->usertype;
+        $type =$user->usertype;
+        $orderMeal=$request->input('order');
          if ($type == 0)
          {
             $order=new Order;
             $order->user_id = $id;
             $order->save();
+            $i=0;
+         
+            foreach ( $orderMeal as $singleMeal )
+            {
+                
+                $meal_order = new MealOrder;
+                $meal_order->quantity = $singleMeal['quantity'];
+            
+                $meal_order->meal_id =  $singleMeal['id'];
+  $order->meals_orders()->save($meal_order);
+                        //$meals[$i]=$meal_order;
 
-            $meal_order = new MealOrder;
-            $meal_order->quantity = $request->input('quantity');
-            $meal_order->meal_id =  $request->input('meal_id');
-            $order->meals_orders()->save($meal_order);
+                //$i++;
+            }
+            return $meal_order;
+            //MealOrder::insert($meals); // Eloquent
 
-             return $meal_order;
          }
          else{
              return 'cannot enter';
          }
+    
+        
     }  
     /*  if(  $request->user_id  != '' ){
       
