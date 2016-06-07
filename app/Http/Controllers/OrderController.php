@@ -1,13 +1,12 @@
 <?php
-use App\User;
-use App\Meal;
+
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
-use App\Order ;
+use App\MealOrder;
+use App\Order;
 use Response;
 use DB;
-
 
 class OrderController extends Controller
 {
@@ -43,9 +42,28 @@ class OrderController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-       //real user
-      if(  $request->user_id  != '' ){
+    {   
+        $id=$request->input('user_id');
+        $user =User::find($id);
+         $type =$user->usertype;
+         if ($type == 0)
+         {
+            $order=new Order;
+            $order->user_id = $id;
+            $order->save();
+
+            $meal_order = new MealOrder;
+            $meal_order->quantity = $request->input('quantity');
+            $meal_order->meal_id =  $request->input('meal_id');
+            $order->meals_orders()->save($meal_order);
+
+             return $meal_order;
+         }
+         else{
+             return 'cannot enter';
+         }
+    }  
+    /*  if(  $request->user_id  != '' ){
       
                 $quan= (int)$request-> input('quantity');
 //return $request->get('quantity');      
@@ -73,7 +91,7 @@ class OrderController extends Controller
                     'message' => 'انت لست مسجل بالتطبيق  ليس مسموحالك طلب وجبة '
                 ]
             ], 422);}
-    }
+   */ 
    
     /**
      * Display the specified resource.
@@ -84,7 +102,9 @@ class OrderController extends Controller
     //show all orders for specic user with name of meal and the chef and quantity
     public function show($id)
     {
-       //$order = Order::find($id);
+        
+    }
+      /* //$order = Order::find($id);
  $meal_id = DB::table('orders')->where('user_id','=',$id)->lists('meal_id');
    foreach ( $meal_id as $meal)
 {
@@ -100,8 +120,8 @@ class OrderController extends Controller
                   }
             //echo("sum = $sum");
      }     
-     }
-     }
+     }*/
+     
      
 
  /*if(!$order){
@@ -144,7 +164,7 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
        
-        if(! $request->is_confirm or ! $request->id){
+        /*if(! $request->is_confirm or ! $request->id){
             return Response::json([
                 'error' => [
                     'message' => 'Please Provide Both id  and user_id'
@@ -158,7 +178,7 @@ class OrderController extends Controller
  
         return Response::json([
                 'message' => 'تم تأكيد طلبك'
-        ]);
+        ]);*/
     }
 
     /**
@@ -170,14 +190,14 @@ class OrderController extends Controller
     public function destroy($id)
     {
         
-              $order = Order::find($id);
+             /* $order = Order::find($id);
               $order->delete();
               return Response::json([
                 'message' => 'تم  إلغاء  طلبك'
-        ]);   
+        ]);   */
     }
     
-
+/*
 private function transformCollection($orders){
     return array_map([$this, 'transform'], $orders->toArray());
 }
@@ -228,7 +248,7 @@ $total=0;
    //echo($sum);
 echo "total =$total";
 }
-
+*/
 
 //$quantity=DB::table('orders')->where('meal_id','=',$id)->lists('meal_id');
 

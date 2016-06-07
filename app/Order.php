@@ -4,14 +4,17 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     public $timestamps = false;
-    protected $fillable=['meal_id','user_id','quantity' ];
+    protected $table='orders'; 
+
+    protected $fillable=['user_id'];
     
     public function user()
     {
         return $this->belongsTo('App\User');
     }
-     public function meal()
+     public function meals_orders()
     {
-       return $this->hasMany('App\Meal', 'meal_id');
+       return $this->hasMany('App\MealOrder');
     }
-      }
+    
+ }

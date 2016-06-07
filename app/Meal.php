@@ -6,13 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Meal extends Model
 {
-    
-     protected $fillable=['id','name','price' , 'quantity' , 'description','category_id', 'time','user_id'];
+    protected $table='meals'; 
+    protected $fillable=['id','name','price' , 'quantity' , 'description','category_id', 'time','user_id'];
    
-   // public function orders()
-    //{
-      //  return $this->hasMany('App\Order');
-   // }
+
 public function users()
     {
         return $this->belongsTo('App\User' );
@@ -23,8 +20,8 @@ public function users()
     {
         return $this->belongsTo('App\Category');
     }  
-    public function order()
+    public function meals_orders()
     {
-        return $this->hasMany('App\Order', 'order_id');
+        return $this->hasMany('App\MealOrder');
     }  
 }

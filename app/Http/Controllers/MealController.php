@@ -37,7 +37,7 @@ class MealController extends Controller
      */
     public function store(Request $request) {
 
-        $meal = Meal::create($request->all());
+       $meal = Meal::create($request->all());
 
        return $meal;
     }
@@ -103,12 +103,12 @@ class MealController extends Controller
                  
                      
        public function showMealOfUser($id)
-    {
+        {
 
-         $meals = DB::table('meals')->where('user_id','=',$id)->get();
+             $meals = DB::table('meals')->where('user_id','=',$id)->get();
         
-         return Response::json($meals);
-    }
+            return Response::json($meals);
+        }
                  
                     
 
