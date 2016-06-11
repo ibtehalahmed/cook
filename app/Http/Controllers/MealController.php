@@ -91,15 +91,10 @@ class MealController extends Controller
      $chefs=[];$i=0;
         //all objects of meals
          $meals = DB::table('meals')->where('category_id','=',$id)->get();
-         foreach ( $meals as $meal){
-                   
-                    $chef = DB::table('users')->where('id','=',$meal->user_id)->get();
-                    $chefs[$i]=$chef;    
-                    $i++;
-    }
-         $array = array_merge( $meals , $chefs);
+  
+         $array = Array( $meals);
          return Response::json($array);
-                 }
+         }
                  
                      
        public function showMealOfUser($id)
@@ -110,6 +105,6 @@ class MealController extends Controller
             return Response::json($meals);
         }
                  
-                    
+           
 
 }

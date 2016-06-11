@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Location;
-
+use Response;
 use App\Category;
 
 class LocationController extends Controller

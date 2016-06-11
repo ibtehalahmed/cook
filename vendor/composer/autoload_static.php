@@ -379,6 +379,7 @@ class ComposerStaticInitb22852d471e77a26edc1b0268d6710a9
         'Hamcrest\\Util' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
         'Hamcrest\\Xml\\HasXPath' => __DIR__ . '/..' . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
         'IlluminateQueueClosure' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
+        'ModifyDateMealsOrdersTable' => __DIR__ . '/../..' . '/database/migrations/2016_06_11_121648_modify_date_meals_orders_table.php',
         'ModifyTableMeal' => __DIR__ . '/../..' . '/database/migrations/2016_06_05_141452_modify_table_meal.php',
         'ModifyTableOrder' => __DIR__ . '/../..' . '/database/migrations/2016_06_05_131017_modify_table_order.php',
         'ModifyUsertypeToInteger' => __DIR__ . '/../..' . '/database/migrations/2016_05_28_082927_modify_usertype_to_integer.php',

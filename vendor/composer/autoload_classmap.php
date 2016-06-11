@@ -92,6 +92,7 @@ return array(
     'Hamcrest\\Util' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Util.php',
     'Hamcrest\\Xml\\HasXPath' => $vendorDir . '/hamcrest/hamcrest-php/hamcrest/Hamcrest/Xml/HasXPath.php',
     'IlluminateQueueClosure' => $vendorDir . '/laravel/framework/src/Illuminate/Queue/IlluminateQueueClosure.php',
+    'ModifyDateMealsOrdersTable' => $baseDir . '/database/migrations/2016_06_11_121648_modify_date_meals_orders_table.php',
     'ModifyTableMeal' => $baseDir . '/database/migrations/2016_06_05_141452_modify_table_meal.php',
     'ModifyTableOrder' => $baseDir . '/database/migrations/2016_06_05_131017_modify_table_order.php',
     'ModifyUsertypeToInteger' => $baseDir . '/database/migrations/2016_05_28_082927_modify_usertype_to_integer.php',

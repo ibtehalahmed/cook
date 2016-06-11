@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\MealOrder;
 use App\Order;
 use App\User;
+use App\Meal;
 use Response;
 use DB;
 
@@ -44,7 +45,14 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {   
-        $id=$request->input('user_id');
+        if(! $request->user_id ){
+            return Response::json([
+                'error' => [
+                    'message' => 'من فضلك قم بتسجيل الدخول لتتمكن من الطلب'
+                ]
+            ], 422);
+        }else{
+        $id=$request->user_id ;
         $user =User::find($id);
         $type =$user->usertype;
         $orderMeal=$request->input('order');
@@ -53,29 +61,24 @@ class OrderController extends Controller
             $order=new Order;
             $order->user_id = $id;
             $order->save();
-            $i=0;
          
             foreach ( $orderMeal as $singleMeal )
             {
-                
                 $meal_order = new MealOrder;
                 $meal_order->quantity = $singleMeal['quantity'];
-            
                 $meal_order->meal_id =  $singleMeal['id'];
-  $order->meals_orders()->save($meal_order);
-                        //$meals[$i]=$meal_order;
-
-                //$i++;
+                //add order data through 1 to many relation
+                $order->meals_orders()->save($meal_order);
+            
             }
-            return $meal_order;
-            //MealOrder::insert($meals); // Eloquent
+            return ($order);
 
          }
          else{
-             return 'cannot enter';
+             return 'cannot enter data';
          }
     
-        
+        }
     }  
     /*  if(  $request->user_id  != '' ){
       
@@ -178,21 +181,28 @@ class OrderController extends Controller
     public function update(Request $request, $id)
     {
        
-        /*if(! $request->is_confirm or ! $request->id){
+        if(! $request->is_confirm){
             return Response::json([
                 'error' => [
-                    'message' => 'Please Provide Both id  and user_id'
+                    'message' => 'Please confirm order'
                 ]
             ], 422);
         }
-        $nour = Order::find($id);
-        $nour->is_confirm = $request->is_confirm;
-        $nour->id = $request->id;
-        $nour->save();
- 
-        return Response::json([
+        $order = Order::find($id);
+        $order->is_confirm = $request->is_confirm;
+        $order->delever_time = $request->time;
+        $order->total_price =$request->total_price;
+        $order->save();
+        $meals=$request->meals;
+        for ($i=0;$i<sizeof($meals);$i++){
+            $meal_id=$meals[$i]['id'];
+            $meal=Meal::find($meal_id);
+            $meal->quantity=($meal->quantity)-($meals[$i]['quantity']);
+            $meal->save();
+        }
+               return Response::json([
                 'message' => 'تم تأكيد طلبك'
-        ]);*/
+        ]);
     }
 
     /**
@@ -210,8 +220,36 @@ class OrderController extends Controller
                 'message' => 'تم  إلغاء  طلبك'
         ]);   */
     }
+   
+    public function update_comment(Request $request){
+         $order_id = $request->comment['order_id'];
+         $meal_id = $request->comment['meal_id'];
+         $Date = $request->comment['date'];
+         $text = $request->comment['text'];
+         $user = $request->comment['user'];
+         $user_id = $user['id'];
+         $meal = DB::table('meals_orders')->where('order_id', '=', $order_id)
+                                          ->where('meal_id', '=', $meal_id)
+                                          ->update(['comment' => $text ,'comment_date' =>$Date]);
+//$meal equals to 1 when updated successfully ,and equal to zero when cannot update 
+         return $meal;
+    }
     
+           public function showCommentsOfMeal($id){
+          /* $meal=Meal::find($id);
+           $comments=$meal->meals_orders;
+           
+           return Response::json($comments);*/
+           $meals = DB::table('meals_orders')
+            ->select('meals_orders.id as comment_id','comment','comment_date','user_id','name')
+            ->join('orders', 'orders.id', '=', 'meals_orders.order_id')
+            ->join('users', 'orders.user_id', '=', 'users.id')
+
+            ->get();
+           return $meals;
+       }  
 /*
+ * 
 private function transformCollection($orders){
     return array_map([$this, 'transform'], $orders->toArray());
 }

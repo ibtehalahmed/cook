@@ -12,18 +12,28 @@ use Illuminate\Support\Facades\Hash;
 use Response;
 use DB;
 
-
 class UserController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function __construct(){
 
     }
+    
+    public function remain_logged_in($id){
+        $user=User::find ($id);
+        $credentials=[
+        'email' => $user->email,
+        'password' => $user->password    
+                ];
+        if ((! Auth ::attempt($credentials))){
+              return response('make sure that the email and password match',403);  
+             }
+              return response(Auth::User(),201);
+                            
+              }        
+        
+    
     
       public function checkAuth(Request $request){
               $credentials = [
@@ -33,10 +43,15 @@ class UserController extends Controller
               if ((! Auth ::attempt($credentials))){
                 return response('make sure that the email and password match',403);  
               }
+              //Auth::login(Auth::user()->id,true);
               return response(Auth::User(),201);
                             
               }
-
+       /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */       
     public function index()
     {
         $users = User::all();
@@ -201,9 +216,21 @@ class UserController extends Controller
     
         return $chefs;
     }
+        public function updateAddress(Request $request, $id){
+            if(User::find($id)){
+                $user = User::find($id);
+                $user->address = $request->address;
+                $user->location_id = $request->location_id;
+                $user->save();
+ 
+                return Response::json([
+                'message' => 'تم تعديل'
+                ]);
+                }
+
     
       }
-    
+}
 
 
     
