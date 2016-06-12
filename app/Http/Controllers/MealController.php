@@ -49,7 +49,10 @@ class MealController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id) {
-        $meals = DB::table('meals')->where('id', '=', $id)->get();
+        $meals = DB::table('meals')
+            ->select('meals.id','meals.name','meals.description','meals.quantity','meals.price','users.name as user_name','users.id as user_id')
+            ->join('users', 'meals.user_id', '=', 'users.id')
+                ->get();
         return $meals;
     }
 
@@ -99,7 +102,6 @@ class MealController extends Controller
                      
        public function showMealOfUser($id)
         {
-
              $meals = DB::table('meals')->where('user_id','=',$id)->get();
         
             return Response::json($meals);

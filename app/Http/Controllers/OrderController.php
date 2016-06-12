@@ -236,10 +236,6 @@ class OrderController extends Controller
     }
     
            public function showCommentsOfMeal($id){
-          /* $meal=Meal::find($id);
-           $comments=$meal->meals_orders;
-           
-           return Response::json($comments);*/
            $meals = DB::table('meals_orders')
             ->select('meals_orders.id as comment_id','comment','comment_date','user_id','name')
             ->join('orders', 'orders.id', '=', 'meals_orders.order_id')
